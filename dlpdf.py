@@ -29,10 +29,10 @@ def get_file(link):
 				response = urllib2.urlopen(req)
 				
 				print "TRYING TO DOWNLOAD {}".format(str(filetosave))
-				#print open(os.path.basename(url), "wb")
 				with open(filetosave, "wb") as localfile2:
 					#req.read()
 					localfile2.write(response.read())
+					print "i think it downloaded....."
 			except:
 				print "HTTP Error: ",sys.exc_info()
 				print "couldn't download {}".format(str(filetosave))
@@ -40,9 +40,21 @@ def get_file(link):
 
 ############ main program ############
 
+
+if len(sys.argv) < 2:
+	print "Please enter course name"
+	exit()
+
+
 try:
+	course = sys.argv[1].upper()
+	year = '_2013T2'
+	url = 'http://ecs.victoria.ac.nz/Courses/'+course+year+'/LectureSchedule'
+	print url
+	#exit()
+	u = urllib2.urlopen(url)
 	#u = urllib2.urlopen('http://ecs.victoria.ac.nz/Courses/NWEN301_2013T1/LectureSchedule')
-	u = urllib2.urlopen('http://ecs.victoria.ac.nz/Courses/SWEN222_2013T2/LectureSchedule')
+	#u = urllib2.urlopen('http://ecs.victoria.ac.nz/Courses/SWEN222_2013T2/LectureSchedule')
 
 except:
 	print "Problem connecting to url", sys.exc_info()
